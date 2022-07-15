@@ -1,12 +1,47 @@
-from django.shortcuts import render
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .models import TaskModel
-from .serializers import TaskSerializer
+from .forms import TaskForm
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import UpdateView, DeleteView, CreateView
+from django.urls import reverse_lazy
 
-class TaskListCreateView(ListCreateAPIView):
+class TaskListView(ListView):
+    """
+        View for listing all the task
+    """
+    context_object_name = 'task_list'
     queryset = TaskModel.objects.all()
-    serializer_class = TaskSerializer
+    template_name = 'task_list.html'
 
-class TaskRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
+class TaskCreateView(CreateView):
+    """
+        View for creating a task
+    """
+    model = TaskModel
+    form_class = TaskForm
+    template_name = 'task_create.html'
+    success_url = reverse_lazy('list')
+
+class TaskDetailView(DetailView):
+    """
+        View for Displyign a particular task
+    """
+    context_object_name = 'task'
     queryset = TaskModel.objects.all()
-    serializer_class = TaskSerializer
+    template_name = 'task_detail.html'
+
+class TaskUpdateView(UpdateView):
+    """
+        View for updating a task
+    """
+    model = TaskModel
+    fields = '__all__'
+    template_name = 'task_update.html'
+    success_url = reverse_lazy('list')
+
+class TaskDeleteView(DeleteView):
+    """
+        View for delete a task
+    """
+    model = TaskModel
+    template_name = 'task_delete.html'
+    success_url = reverse_lazy('list')

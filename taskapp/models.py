@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class TaskModel(models.Model):
     Priority_choices = (
         ('H', 'High'),
