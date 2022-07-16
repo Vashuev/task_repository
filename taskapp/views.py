@@ -34,6 +34,7 @@ class TaskUpdateView(UpdateView):
         View for updating a task
     """
     model = TaskModel
+    context_object_name = 'task'
     fields = '__all__'
     template_name = 'task_update.html'
     success_url = reverse_lazy('list')
@@ -43,5 +44,6 @@ class TaskDeleteView(DeleteView):
         View for delete a task
     """
     model = TaskModel
+    context_object_name = 'task'
     template_name = 'task_delete.html'
     success_url = reverse_lazy('list')

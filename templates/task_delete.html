@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
     
 {% block content %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'list' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'delete' task.id %}">Task : {{task.name}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Update</li>    
+    </ol>
+</nav>
+
 <form method="post">
     {% csrf_token %}
-    <h2>Are you sure you want to delete this</h2>
-    <input type="submit" value="Submit">
+    <p class="my-2">Are you sure you want to delete task named : <strong>{{task.name}}</strong></p>
+    <button type="submit" class="btn btn-danger rounded">Delete</button>
+    <a href="{% url 'list' %}" class="btn btn-primary rounded ml-5">Cancel</a>
 </form>
 {% endblock %}

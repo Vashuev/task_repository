@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
     
+{% load crispy_forms_tags %}
+
 {% block content %}
-<form method="post">
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'list' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'detail' task.id %}">Task : {{task.name}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Update</li>    
+    </ol>
+</nav>
+
+<form method="post" class="mb-5">
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Submit">
+    {{form|crispy}}
+    <button type="submit" class="btn btn-primary rounded">Update</button>
 </form>
 {% endblock %}

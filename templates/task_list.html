@@ -1,10 +1,25 @@
 {% extends 'base.html' %}
     
 {% block content %}
-{% for task in task_list %}
-    {{task.id}}<br>
-    {{task.name}}<br>
-    {{task.priority}}<br>
-    {{task.description}}<br>
-{% endfor %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Home</li>
+        </ol>
+    </nav>
+    {% for task in task_list %}
+        <div class="border border-warning rounded my-4">
+            <div class="d-flex justify-content-between pt-2">
+                <p class="ml-5 "><a href="{% url 'detail' task.id  %}"><strong>{{task.name}}</strong></a> : {{task.priority}}</p>
+                <div>
+                    <button class="button btn-outline-success rounded ">
+                        <a href="{% url 'update' task.id %}">Edit</a>
+                    </button>
+                    <button class="button btn-outline-danger rounded mx-4">
+                        <a href="{% url 'delete' task.id %}">Delete</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
 {% endblock %}

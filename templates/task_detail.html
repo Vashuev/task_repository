@@ -1,8 +1,21 @@
 {% extends 'base.html' %}
     
 {% block content %}
-    {{task.id}}<br>
-    {{task.name}}<br>
-    {{task.priority}}<br>
-    {{task.description}}<br>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'list' %}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Task</li>    
+      </ol>
+    </nav>
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            <h5 class="card-title">Title : {{task.name}}</h5>
+        </div>
+        <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-muted">Priority : {{task.priority}}</h6>
+          <p class="card-text">{{task.description}}</p>
+          <a href="{% url 'update' task.id %}" class="btn btn-primary mr-5">Edit it</a>
+          <a href="{% url 'delete' task.id %}" class="btn btn-danger ml-3">Delete</a>
+        </div>
+      </div>
 {% endblock %}
